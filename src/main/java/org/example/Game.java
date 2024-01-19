@@ -145,7 +145,7 @@ public final class Game {
 
             // do winner step
             if (variant == 3) {
-                updateBox(getStepIndex(variantToStep), ZERO);
+                updateBox(lastBlankIdx, ZERO);
                 return true;
             }
             mapIdx++;
