@@ -22,8 +22,8 @@ public final class Game {
     private static final int ZERO_BLANK2_SUM = ZERO + BLANK * 2;
     private static final int ZERO2_BLANK_SUM = ZERO * 2 + BLANK;
     private int stepCount;
-    private final Scanner scan;
-    private final Random random;
+    private static final Scanner SCAN = new Scanner(System.in);
+    private static final Random RAND = new Random();
     private final char[] box;
     private static final int[][] BOX_MAP = {
             {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6},
@@ -32,8 +32,6 @@ public final class Game {
 
     public Game() {
         this.stepCount = 0;
-        this.scan = new Scanner(System.in);
-        this.random  = new Random();
         this.box = new char[9];
         Arrays.fill(box, BLANK);
     }
@@ -42,7 +40,7 @@ public final class Game {
         output(MSG_START.get());
         output(MSG_START_BOX.get());
         mainProcess();
-        scan.close();
+        SCAN.close();
     }
 
     private void mainProcess() {
@@ -72,11 +70,11 @@ public final class Game {
     private void doStepHuman() {
         while (true) {
             int input = 0;
-            if (scan.hasNextInt()) {
-                input = scan.nextInt();
+            if (SCAN.hasNextInt()) {
+                input = SCAN.nextInt();
             } else {
                 output(MSG_INVALID_INPUT.get());
-                scan.next();
+                SCAN.next();
                 continue;
             }
             --input;
@@ -107,7 +105,7 @@ public final class Game {
         }
 
         while (true) {
-            int rand = (random.nextInt(0, 9));
+            int rand = (RAND.nextInt(0, 9));
             if (isPositionBlank(rand)) {
                 updateBox(rand, ZERO);
                 break;
